@@ -3,25 +3,41 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #F5F0E8;
+  --foreground: #2C2A1E;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-lato), "Helvetica Neue", sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .label-caps {
+    font-family: var(--font-lato), sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 400;
   }
+
+  .placeholder-amber {
+    color: #8B5E3C;
+    font-style: italic;
+    border-bottom: 1px dashed #8B5E3C;
+  }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
 }
