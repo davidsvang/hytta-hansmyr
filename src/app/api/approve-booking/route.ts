@@ -1,24 +1,34 @@
 import { NextRequest, NextResponse } from "next/server";
-import { redis, addBookedRange, PendingBooking } from "@/lib/redis";
+import { redis, addBookedRange, addBookingRecord, PendingBooking } from "@/lib/redis";
 import { beregnPris, formaterPris } from "@/lib/pricing";
+import { randomUUID } from "crypto";
 
 export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get("token");
 
-  if (!token) {
-    return NextResponse.redirect(new URL("/godkjenn?status=error", req.url));
-  }
+  if (!token) return NextResponse.redirect(new URL("/godkjenn?status=error", req.url));
 
   const booking = await redis.get<PendingBooking>(`pending:${token}`);
+  if (!booking) return NextResponse.redirect(new URL("/godkjenn?status=ugyldig", req.url));
 
-  if (!booking) {
-    return NextResponse.redirect(new URL("/godkjenn?status=ugyldig", req.url));
-  }
+  const { total, netter, lines } = beregnPris(booking.innsjekk, booking.utsjekk);
 
-  await addBookedRange({
+  await addBookedRange({ innsjekk: booking.innsjekk, utsjekk: booking.utsjekk, navn: booking.navn });
+
+  await addBookingRecord({
+    id: randomUUID(),
+    navn: booking.navn,
+    epost: booking.epost,
+    telefon: booking.telefon ?? "",
     innsjekk: booking.innsjekk,
     utsjekk: booking.utsjekk,
-    navn: booking.navn,
+    netter,
+    gjester: booking.gjester ?? "1",
+    melding: booking.melding ?? "",
+    totalpris: total,
+    prislinjer: lines,
+    betalt: false,
+    godkjentDato: new Date().toISOString(),
   });
 
   await redis.del(`pending:${token}`);
@@ -26,13 +36,12 @@ export async function GET(req: NextRequest) {
   const apiKey = process.env.RESEND_API_KEY;
   if (apiKey) {
     const formatDate = (d: string) =>
-      new Date(d).toLocaleDateString("nb-NO", {
-        weekday: "long", day: "numeric", month: "long", year: "numeric",
-      });
+      new Date(d).toLocaleDateString("nb-NO", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
 
-    const { total, netter, lines } = beregnPris(booking.innsjekk, booking.utsjekk);
     const totalFormatted = formaterPris(total);
-    const prisLinjer = lines.map(l => `<p style="margin: 0 0 4px; font-size: 14px; color: #5F5E5A;">${l.label}: ${formaterPris(l.amount)}</p>`).join("");
+    const prisLinjer = lines
+      .map((l) => `<p style="margin: 0 0 4px; font-size: 14px; color: #5F5E5A;">${l.label}: ${formaterPris(l.amount)}</p>`)
+      .join("");
 
     await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -45,13 +54,9 @@ export async function GET(req: NextRequest) {
         html: `
           <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #2C2A1E; background: #ffffff;">
             <table width="100%" cellpadding="0" cellspacing="0" style="background: #2C3D1E;">
-              <tr>
-                <td style="padding: 24px 32px;">
-                  <h1 style="color: #ffffff; margin: 0; font-size: 22px; font-weight: normal; letter-spacing: 0.05em;">
-                    Hytta på Hansmyr
-                  </h1>
-                </td>
-              </tr>
+              <tr><td style="padding: 24px 32px;">
+                <h1 style="color: #ffffff; margin: 0; font-size: 22px; font-weight: normal;">Hytta på Hansmyr</h1>
+              </td></tr>
             </table>
             <div style="padding: 32px;">
               <h2 style="font-size: 22px; font-weight: normal; color: #2C2A1E; margin-bottom: 16px;">
@@ -69,17 +74,12 @@ export async function GET(req: NextRequest) {
                 <p style="margin: 0; font-size: 14px; color: #3B5E2B;">Betal via Vipps til <strong>+47 948 42 174</strong> (David Stakkeng Vang)</p>
               </div>
               <p style="color: #5F5E5A; line-height: 1.7; margin-bottom: 16px;">
-                Vi gleder oss til å ta imot deg! Merk Vipps-betalingen med ditt navn og innsjekk-dato.
+                Vi gleder oss til å ta imot deg! Merk betalingen med navn og innsjekk-dato.
               </p>
-              <p style="color: #5F5E5A; line-height: 1.7;">
-                Spørsmål? Svar på denne e-posten.
-              </p>
-              <p style="margin-top: 32px; color: #9A9890; font-size: 13px;">
-                — David, Hytta på Hansmyr
-              </p>
+              <p style="color: #5F5E5A; line-height: 1.7;">Spørsmål? Svar på denne e-posten.</p>
+              <p style="margin-top: 32px; color: #9A9890; font-size: 13px;">— David, Hytta på Hansmyr</p>
             </div>
-          </div>
-        `,
+          </div>`,
       }),
     });
   }
