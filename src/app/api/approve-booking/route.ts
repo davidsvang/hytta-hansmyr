@@ -1,22 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { redis, addBookedRange, PendingBooking } from "@/lib/redis";
-
-function calculatePrice(innsjekk: string, utsjekk: string): { total: number; netter: number } {
-  let total = 0;
-  const start = new Date(innsjekk);
-  const end = new Date(utsjekk);
-  const current = new Date(start);
-  let netter = 0;
-
-  while (current < end) {
-    const day = current.getDay(); // 0=Sun, 5=Fri, 6=Sat
-    total += day === 0 || day === 5 || day === 6 ? 1900 : 1200;
-    netter++;
-    current.setDate(current.getDate() + 1);
-  }
-
-  return { total, netter };
-}
+import { beregnPris, formaterPris } from "@/lib/pricing";
 
 export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get("token");
@@ -46,8 +30,9 @@ export async function GET(req: NextRequest) {
         weekday: "long", day: "numeric", month: "long", year: "numeric",
       });
 
-    const { total, netter } = calculatePrice(booking.innsjekk, booking.utsjekk);
-    const totalFormatted = total.toLocaleString("nb-NO");
+    const { total, netter, lines } = beregnPris(booking.innsjekk, booking.utsjekk);
+    const totalFormatted = formaterPris(total);
+    const prisLinjer = lines.map(l => `<p style="margin: 0 0 4px; font-size: 14px; color: #5F5E5A;">${l.label}: ${formaterPris(l.amount)}</p>`).join("");
 
     await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -79,7 +64,8 @@ export async function GET(req: NextRequest) {
                 <p style="margin: 0; font-size: 15px; color: #2C2A1E;"><strong>Gjester:</strong> ${booking.gjester}</p>
               </div>
               <div style="background: #EAF3DE; border-left: 3px solid #3B5E2B; padding: 16px 20px; margin-bottom: 24px; border-radius: 2px;">
-                <p style="margin: 0 0 6px; font-size: 15px; color: #2C2A1E;"><strong>Totalpris: ${totalFormatted} kr</strong></p>
+                ${prisLinjer}
+                <p style="margin: 8px 0 6px; font-size: 16px; color: #2C2A1E; border-top: 1px solid #3B5E2B; padding-top: 8px;"><strong>Totalt: ${totalFormatted}</strong></p>
                 <p style="margin: 0; font-size: 14px; color: #3B5E2B;">Betal via Vipps til <strong>+47 948 42 174</strong> (David Stakkeng Vang)</p>
               </div>
               <p style="color: #5F5E5A; line-height: 1.7; margin-bottom: 16px;">

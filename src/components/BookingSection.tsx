@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import type { BookingRange } from "@/lib/redis";
+import { beregnPris, formaterPris } from "@/lib/pricing";
 
 const prices = [
   {
@@ -323,6 +324,28 @@ export default function BookingSection() {
                   </select>
                 </div>
               </div>
+
+              {/* Live prisestimering */}
+              {form.innsjekk && form.utsjekk && form.utsjekk > form.innsjekk && (() => {
+                const { netter, total, lines } = beregnPris(form.innsjekk, form.utsjekk);
+                return (
+                  <div className="mb-4 bg-[#EAF3DE] border border-[#3B5E2B]/20 rounded-sm p-4">
+                    <p className="label-caps text-[#3B5E2B] mb-2">Prisestimering</p>
+                    <div className="space-y-1 mb-2">
+                      {lines.map((l, i) => (
+                        <div key={i} className="flex justify-between text-sm font-lato font-light text-[#5F5E5A]">
+                          <span>{l.label}</span>
+                          <span>{formaterPris(l.amount)}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex justify-between font-lato text-[#2C2A1E] border-t border-[#3B5E2B]/20 pt-2">
+                      <span className="text-sm">Totalt ({netter} netter)</span>
+                      <span className="font-normal">{formaterPris(total)}</span>
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* Message */}
               <div className="mb-5">
