@@ -10,7 +10,8 @@ const guides = [
     title: "Aggregat",
     content: (
       <div className="space-y-3 text-[#5F5E5A] font-lato font-light text-sm leading-relaxed">
-        <p className="placeholder-amber">[TRINN-FOR-TRINN GUIDE KOMMER — David fyller inn]</p>
+        <p>Start aggregatet — ikke noe hokus pokus. Følg anvisningene på siden av maskinen.</p>
+        <p>Bruker du det mye, husk å fylle bensin. Kanne finnes i boden.</p>
       </div>
     ),
     comingSoon: false,
@@ -46,7 +47,7 @@ const guides = [
         <div className="relative h-40 rounded-sm overflow-hidden mb-4">
           <CabinImage src="/images/fyr-i-peisen-stua.jpeg" alt="Fyr i peisen" fill className="object-cover" />
         </div>
-        <p className="placeholder-amber">[TRINN-FOR-TRINN GUIDE KOMMER — David fyller inn]</p>
+        <p>Vedovnen brukes til å varme hytten — ikke til matlaging. Bruk stekeovnen for mat!</p>
       </div>
     ),
     comingSoon: false,
@@ -60,12 +61,9 @@ const guides = [
         <div className="relative h-56 rounded-sm overflow-hidden mb-4">
           <CabinImage src="/images/vannpumpe.jpeg" alt="Håndpumpe ved brønnen" fill className="object-cover object-bottom" />
         </div>
-        <p>
-          Vannet fra bekk og borebrønn er rent og trygt å drikke direkte.
-          Håndpumpen er ved{" "}
-          <span className="placeholder-amber">[LOKASJON — David fyller inn]</span>.
-        </p>
-        <p className="placeholder-amber">[MER INNHOLD KOMMER]</p>
+        <p>Bare å pumpe løs — vannet er rent og trygt å drikke.</p>
+        <p>Det kan være litt grums i bunnen første gang. Pump til vannet er klart før du bruker det.</p>
+        <p>Foretrekker du å være på den sikre siden? Ta gjerne med eget vann.</p>
       </div>
     ),
     comingSoon: false,
