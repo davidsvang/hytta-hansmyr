@@ -105,7 +105,39 @@ export async function POST(req: NextRequest) {
       </div>
     `;
 
-    // Send via Resend REST API
+    const confirmationHtml = `
+      <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #2C2A1E;">
+        <div style="background: #3B5E2B; padding: 24px 32px; margin-bottom: 32px;">
+          <h1 style="color: white; margin: 0; font-size: 22px; font-weight: normal; letter-spacing: 0.05em;">
+            Hytta på Hansmyr
+          </h1>
+        </div>
+        <div style="padding: 0 32px 32px;">
+          <h2 style="font-size: 20px; font-weight: normal; color: #2C2A1E; margin-bottom: 16px;">
+            Hei ${navn} — vi har mottatt forespørselen din!
+          </h2>
+          <p style="color: #5F5E5A; line-height: 1.7; margin-bottom: 20px;">
+            Takk for din henvendelse. Vi har registrert ønsket ditt om å leie hytta på Hansmyr:
+          </p>
+          <div style="background: #F5F0E8; border-radius: 4px; padding: 20px 24px; margin-bottom: 24px;">
+            <p style="margin: 0 0 8px; font-size: 15px;"><strong>Innsjekk:</strong> ${formatDate(innsjekk)}</p>
+            <p style="margin: 0 0 8px; font-size: 15px;"><strong>Utsjekk:</strong> ${formatDate(utsjekk)}</p>
+            <p style="margin: 0; font-size: 15px;"><strong>Gjester:</strong> ${gjester || "1"}</p>
+          </div>
+          <p style="color: #5F5E5A; line-height: 1.7; margin-bottom: 20px;">
+            Vi svarer deg som regel innen 24 timer med bekreftelse og informasjon om betaling via Vipps.
+          </p>
+          <p style="color: #5F5E5A; line-height: 1.7;">
+            Spørsmål? Svar på denne e-posten, så hjelper vi deg.
+          </p>
+          <p style="margin-top: 32px; color: #9A9890; font-size: 13px;">
+            — David, Hytta på Hansmyr
+          </p>
+        </div>
+      </div>
+    `;
+
+    // Send notification to owner
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -113,7 +145,7 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Hytta på Hansmyr <onboarding@resend.dev>",
+        from: "Hytta på Hansmyr <booking@hansmyr.no>",
         to: ["davidstakkengvang@gmail.com"],
         reply_to: epost,
         subject: `Bookingforespørsel: ${formatDate(innsjekk)} → ${formatDate(utsjekk)} (${netter} netter)`,
@@ -126,6 +158,22 @@ export async function POST(req: NextRequest) {
       console.error("Resend error:", err);
       return NextResponse.json({ error: "Kunne ikke sende e-post" }, { status: 500 });
     }
+
+    // Send confirmation to guest
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Hytta på Hansmyr <booking@hansmyr.no>",
+        to: [epost],
+        reply_to: "davidstakkengvang@gmail.com",
+        subject: "Vi har mottatt forespørselen din — Hytta på Hansmyr",
+        html: confirmationHtml,
+      }),
+    });
 
     return NextResponse.json({ ok: true });
   } catch (err) {
