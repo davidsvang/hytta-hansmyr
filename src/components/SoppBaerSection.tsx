@@ -14,7 +14,7 @@ export default function SoppBaerSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {/* Blåbær */}
           <div className="bg-white rounded-sm border border-[#2C2A1E]/10 overflow-hidden">
-            <div className="relative h-52">
+            <div className="relative h-72">
               <CabinImage
                 src="/images/blåbær.jpeg"
                 alt="Blåbær på skogbunnen"
@@ -44,12 +44,12 @@ export default function SoppBaerSection() {
 
           {/* Sopp */}
           <div className="bg-white rounded-sm border border-[#2C2A1E]/10 overflow-hidden">
-            <div className="relative h-80">
+            <div className="relative h-72">
               <CabinImage
                 src="/images/kilovis-med-kanttarell.jpeg"
                 alt="Kilovis med kantarell fra skogen"
                 fill
-                className="object-contain"
+                className="object-cover"
               />
             </div>
             <div className="p-6">
@@ -79,13 +79,13 @@ export default function SoppBaerSection() {
 
         {/* Sopp-bilder grid */}
         <div className="grid grid-cols-2 gap-3 mb-8">
-          <div className="relative aspect-[3/4] rounded-sm overflow-hidden">
+          <div className="relative aspect-[4/3] rounded-sm overflow-hidden">
             <CabinImage src="/images/kurver-med-kantarell.jpeg" alt="Kurver med kantarell" fill className="object-cover" />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-3">
               <p className="font-playfair italic text-white text-sm">Kantarell fra skogen</p>
             </div>
           </div>
-          <div className="relative aspect-[3/4] rounded-sm overflow-hidden">
+          <div className="relative aspect-[4/3] rounded-sm overflow-hidden">
             <CabinImage src="/images/skog-for-sopp.jpeg" alt="Skogen rundt hytta" fill className="object-cover" />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-3">
               <p className="font-playfair italic text-white text-sm">Skogen på Hansmyr</p>
