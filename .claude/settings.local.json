@@ -36,7 +36,10 @@
       "Bash(sips -g pixelWidth -g pixelHeight /Users/davidstakkengvang/hytta-hansmyr/public/images/kurver-med-kantarell.jpeg /Users/davidstakkengvang/hytta-hansmyr/public/images/skog-for-sopp.jpeg)",
       "WebFetch(domain:www.visitnorway.com)",
       "WebFetch(domain:idrettshallen.nord-odal.kommune.no)",
-      "WebFetch(domain:www.fotball.no)"
+      "WebFetch(domain:www.fotball.no)",
+      "Bash(gh pr create --title 'Vis hele sopp-bildet uten beskjæring' --body ' *)",
+      "Bash(gh pr *)",
+      "Bash(npm uninstall *)"
     ]
   }
 }

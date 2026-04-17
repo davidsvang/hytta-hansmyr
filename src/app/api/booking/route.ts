@@ -1,42 +1,40 @@
 import { NextRequest, NextResponse } from "next/server";
+import { redis } from "@/lib/redis";
+import { randomUUID } from "crypto";
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { navn, epost, telefon, innsjekk, utsjekk, gjester, melding } = body;
 
-    // Basic validation
     if (!navn || !epost || !innsjekk || !utsjekk) {
-      return NextResponse.json(
-        { error: "Mangler påkrevde felt" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Mangler påkrevde felt" }, { status: 400 });
     }
 
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
-      return NextResponse.json(
-        { error: "E-post ikke konfigurert" },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: "E-post ikke konfigurert" }, { status: 500 });
     }
 
-    // Format dates for display
-    const formatDate = (d: string) => {
-      const date = new Date(d);
-      return date.toLocaleDateString("nb-NO", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric",
+    const formatDate = (d: string) =>
+      new Date(d).toLocaleDateString("nb-NO", {
+        weekday: "long", day: "numeric", month: "long", year: "numeric",
       });
-    };
 
     const innDate = new Date(innsjekk);
     const utDate = new Date(utsjekk);
-    const netter = Math.round(
-      (utDate.getTime() - innDate.getTime()) / (1000 * 60 * 60 * 24)
+    const netter = Math.round((utDate.getTime() - innDate.getTime()) / (1000 * 60 * 60 * 24));
+
+    // Store pending booking with a token (expires in 30 days)
+    const token = randomUUID();
+    await redis.set(
+      `pending:${token}`,
+      { innsjekk, utsjekk, navn, epost, telefon, gjester, melding },
+      { ex: 60 * 60 * 24 * 30 }
     );
+
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hansmyr.no";
+    const approveUrl = `${siteUrl}/api/approve-booking?token=${token}`;
 
     const emailHtml = `
       <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #2C2A1E;">
@@ -45,7 +43,6 @@ export async function POST(req: NextRequest) {
             🏡 Ny bookingforespørsel — Hytta på Hansmyr
           </h1>
         </div>
-
         <div style="padding: 0 32px 32px;">
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
             <tr style="border-bottom: 1px solid #E8E3D8;">
@@ -56,15 +53,11 @@ export async function POST(req: NextRequest) {
               <td style="padding: 12px 0; font-size: 13px; color: #5F5E5A; text-transform: uppercase; letter-spacing: 0.1em;">E-post</td>
               <td style="padding: 12px 0; font-size: 16px;"><a href="mailto:${epost}" style="color: #3B5E2B;">${epost}</a></td>
             </tr>
-            ${
-              telefon
-                ? `
+            ${telefon ? `
             <tr style="border-bottom: 1px solid #E8E3D8;">
               <td style="padding: 12px 0; font-size: 13px; color: #5F5E5A; text-transform: uppercase; letter-spacing: 0.1em;">Telefon</td>
               <td style="padding: 12px 0; font-size: 16px;"><a href="tel:${telefon}" style="color: #3B5E2B;">${telefon}</a></td>
-            </tr>`
-                : ""
-            }
+            </tr>` : ""}
             <tr style="border-bottom: 1px solid #E8E3D8;">
               <td style="padding: 12px 0; font-size: 13px; color: #5F5E5A; text-transform: uppercase; letter-spacing: 0.1em;">Innsjekk</td>
               <td style="padding: 12px 0; font-size: 16px;">${formatDate(innsjekk)}</td>
@@ -81,25 +74,25 @@ export async function POST(req: NextRequest) {
               <td style="padding: 12px 0; font-size: 13px; color: #5F5E5A; text-transform: uppercase; letter-spacing: 0.1em;">Gjester</td>
               <td style="padding: 12px 0; font-size: 16px;">${gjester || "1"} ${parseInt(gjester) === 1 ? "gjest" : "gjester"}</td>
             </tr>
-            ${
-              melding
-                ? `
+            ${melding ? `
             <tr>
               <td style="padding: 12px 0; font-size: 13px; color: #5F5E5A; text-transform: uppercase; letter-spacing: 0.1em; vertical-align: top;">Melding</td>
               <td style="padding: 12px 0; font-size: 15px; line-height: 1.6;">${melding.replace(/\n/g, "<br>")}</td>
-            </tr>`
-                : ""
-            }
+            </tr>` : ""}
           </table>
 
-          <div style="background: #EAF3DE; border-left: 3px solid #3B5E2B; padding: 16px 20px; border-radius: 2px; margin-bottom: 24px;">
-            <p style="margin: 0; font-size: 14px; color: #3B5E2B;">
-              💡 Svar på denne e-posten for å bekrefte bookingen, og send Vipps-lenke for betaling.
-            </p>
+          <div style="text-align: center; margin: 32px 0;">
+            <a href="${approveUrl}" style="display: inline-block; background: #3B5E2B; color: white; padding: 14px 32px; text-decoration: none; font-family: Georgia, serif; font-size: 16px; border-radius: 2px; letter-spacing: 0.05em;">
+              ✅ Godkjenn booking
+            </a>
           </div>
 
-          <p style="font-size: 13px; color: #9A9890; margin: 0;">
-            Sendt fra hyttapahansmyr.no · ${new Date().toLocaleString("nb-NO")}
+          <p style="font-size: 12px; color: #9A9890; text-align: center; margin: 0;">
+            Klikk knappen for å bekrefte — gjesten får automatisk bekreftelsesmail og kalenderen oppdateres.
+          </p>
+
+          <p style="font-size: 13px; color: #9A9890; margin-top: 24px;">
+            Sendt fra hansmyr.no · ${new Date().toLocaleString("nb-NO")}
           </p>
         </div>
       </div>
@@ -108,9 +101,7 @@ export async function POST(req: NextRequest) {
     const confirmationHtml = `
       <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #2C2A1E;">
         <div style="background: #3B5E2B; padding: 24px 32px; margin-bottom: 32px;">
-          <h1 style="color: white; margin: 0; font-size: 22px; font-weight: normal; letter-spacing: 0.05em;">
-            Hytta på Hansmyr
-          </h1>
+          <h1 style="color: white; margin: 0; font-size: 22px; font-weight: normal;">Hytta på Hansmyr</h1>
         </div>
         <div style="padding: 0 32px 32px;">
           <h2 style="font-size: 20px; font-weight: normal; color: #2C2A1E; margin-bottom: 16px;">
@@ -127,23 +118,15 @@ export async function POST(req: NextRequest) {
           <p style="color: #5F5E5A; line-height: 1.7; margin-bottom: 20px;">
             Vi svarer deg som regel innen 24 timer med bekreftelse og informasjon om betaling via Vipps.
           </p>
-          <p style="color: #5F5E5A; line-height: 1.7;">
-            Spørsmål? Svar på denne e-posten, så hjelper vi deg.
-          </p>
-          <p style="margin-top: 32px; color: #9A9890; font-size: 13px;">
-            — David, Hytta på Hansmyr
-          </p>
+          <p style="color: #5F5E5A; line-height: 1.7;">Spørsmål? Svar på denne e-posten, så hjelper vi deg.</p>
+          <p style="margin-top: 32px; color: #9A9890; font-size: 13px;">— David, Hytta på Hansmyr</p>
         </div>
       </div>
     `;
 
-    // Send notification to owner
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from: "Hytta på Hansmyr <booking@hansmyr.no>",
         to: ["davidstakkengvang@gmail.com"],
@@ -159,13 +142,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Kunne ikke sende e-post" }, { status: 500 });
     }
 
-    // Send confirmation to guest
     await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from: "Hytta på Hansmyr <booking@hansmyr.no>",
         to: [epost],

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import type { BookingRange } from "@/lib/redis";
 
 const prices = [
   {
@@ -46,15 +47,16 @@ const MONTHS_NO = [
 ];
 const DAYS_NO = ["Ma", "Ti", "On", "To", "Fr", "Lø", "Sø"];
 
-// Sample booked ranges (update these manually or connect to a database later)
-const bookedDates = new Set([
-  "2026-5-10", "2026-5-11", "2026-5-12",
-  "2026-5-17", "2026-5-18", "2026-5-19", "2026-5-20",
-  "2026-6-5", "2026-6-6", "2026-6-7",
-  "2026-6-20", "2026-6-21", "2026-6-22", "2026-6-23", "2026-6-24",
-]);
+function isBooked(year: number, month: number, day: number, ranges: BookingRange[]): boolean {
+  const date = new Date(year, month, day);
+  return ranges.some((r) => {
+    const inn = new Date(r.innsjekk);
+    const ut = new Date(r.utsjekk);
+    return date >= inn && date < ut;
+  });
+}
 
-function CalendarMonth({ year, month }: { year: number; month: number }) {
+function CalendarMonth({ year, month, ranges }: { year: number; month: number; ranges: BookingRange[] }) {
   const { firstDay, daysInMonth } = generateDays(year, month);
   const cells = Array.from({ length: firstDay + daysInMonth }, (_, i) =>
     i < firstDay ? null : i - firstDay + 1
@@ -76,8 +78,7 @@ function CalendarMonth({ year, month }: { year: number; month: number }) {
       <div className="grid grid-cols-7 gap-1">
         {cells.map((day, i) => {
           if (!day) return <div key={i} />;
-          const key = `${year}-${month + 1}-${day}`;
-          const booked = bookedDates.has(key);
+          const booked = isBooked(year, month, day, ranges);
           const isPast = new Date(year, month, day) < new Date(today.getFullYear(), today.getMonth(), today.getDate());
           return (
             <div
@@ -104,6 +105,14 @@ type FormState = "idle" | "loading" | "success" | "error";
 export default function BookingSection() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [bookedRanges, setBookedRanges] = useState<BookingRange[]>([]);
+
+  useEffect(() => {
+    fetch("/api/booked-dates")
+      .then((r) => r.json())
+      .then(setBookedRanges)
+      .catch(() => {});
+  }, []);
   const [form, setForm] = useState({
     navn: "",
     epost: "",
@@ -361,9 +370,9 @@ export default function BookingSection() {
           Kalender — ledige datoer
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-          <CalendarMonth year={2026} month={4} />
-          <CalendarMonth year={2026} month={5} />
-          <CalendarMonth year={2026} month={6} />
+          <CalendarMonth year={2026} month={4} ranges={bookedRanges} />
+          <CalendarMonth year={2026} month={5} ranges={bookedRanges} />
+          <CalendarMonth year={2026} month={6} ranges={bookedRanges} />
         </div>
         {/* Legend */}
         <div className="flex gap-6">
