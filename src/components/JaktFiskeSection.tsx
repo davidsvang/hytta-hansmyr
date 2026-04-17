@@ -12,12 +12,12 @@ export default function JaktFiskeSection() {
         </div>
 
         {/* Hero-bilde jakt */}
-        <div className="relative h-72 rounded-sm overflow-hidden mb-10">
+        <div className="relative h-[520px] rounded-sm overflow-hidden mb-10">
           <CabinImage
             src="/images/morten-luftgever-klippet.jpeg"
             alt="Jakt ved stabburet"
             fill
-            className="object-cover"
+            className="object-cover object-top"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#2C2A1E]/60 to-transparent flex items-end">
             <p className="font-playfair italic text-white text-xl p-8">
