@@ -8,23 +8,35 @@ const guides = [
   {
     icon: "⚡",
     title: "Aggregat",
-    content: null,
-    comingSoon: true,
-    placeholder: "Trinn-for-trinn guide for oppstart av aggregat kommer snart.",
+    content: (
+      <div className="space-y-3 text-[#5F5E5A] font-lato font-light text-sm leading-relaxed">
+        <p className="placeholder-amber">[TRINN-FOR-TRINN GUIDE KOMMER — David fyller inn]</p>
+      </div>
+    ),
+    comingSoon: false,
+    placeholder: null,
   },
   {
     icon: "🚽",
     title: "Gassdo",
-    content: null,
-    comingSoon: true,
-    placeholder: "Guide for bruk av innendørs gassdo kommer snart.",
+    content: (
+      <div className="space-y-3 text-[#5F5E5A] font-lato font-light text-sm leading-relaxed">
+        <p className="placeholder-amber">[TRINN-FOR-TRINN GUIDE KOMMER — David fyller inn]</p>
+      </div>
+    ),
+    comingSoon: false,
+    placeholder: null,
   },
   {
     icon: "🚿",
     title: "Friluftsdusj",
-    content: null,
-    comingSoon: true,
-    placeholder: "Guide for friluftsdusj kommer snart.",
+    content: (
+      <div className="space-y-3 text-[#5F5E5A] font-lato font-light text-sm leading-relaxed">
+        <p className="placeholder-amber">[TRINN-FOR-TRINN GUIDE KOMMER — David fyller inn]</p>
+      </div>
+    ),
+    comingSoon: false,
+    placeholder: null,
   },
   {
     icon: "🔥",
