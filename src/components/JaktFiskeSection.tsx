@@ -58,28 +58,58 @@ export default function JaktFiskeSection() {
             <ul className="space-y-3 text-[#5F5E5A] font-lato font-light text-sm">
               <li className="flex gap-3">
                 <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
-                <span>90% av Nord-Odal er utmark</span>
+                <span>Nord-Odal forvalter ca. 200 000 mål med gran- og furuskog — utenfor ulvesonen</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
-                <span>Elg, hjort, rådyr, rev, småvilt</span>
+                <span><strong>Elg:</strong> Sesong starter tidlig oktober. Kontakt lokale elglag via Nord-Odal JFF</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
-                <span>Kontakt Nord-Odal Jakt- og Fiskeforening for jaktkort og info</span>
+                <span><strong>Rådyr og bukk:</strong> Jaktkort via iNatur.no. Søknadsfrist ca. 1. september. Maks 15 bukkekort og 25 rådyrkort per sesong</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
-                <span>Den store revejakta: Årlig arrangement med 300+ jegere</span>
+                <span><strong>Hare og småvilt:</strong> Stabil og god bestand. Jaktkort kjøpes via iNatur.no eller gjennom foreningen</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
+                <span><strong>Den store revejakta:</strong> Arrangeres hvert år i januar av Nord-Odal JFF — ca. 350 deltakere. Kr 350 for voksne, 150 for junior. Påmelding via foreningen</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
+                <span>Obligatorisk innrapportering etter endt jakt, uavhengig av fangst</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
+                <span>Kontakt Nord-Odal JFF: <a href="mailto:post@nordodaljff.no" className="text-[#3B5E2B] underline">post@nordodaljff.no</a> · Tlf: 984 47 095</span>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Placeholder */}
-        <div className="rounded-sm border border-dashed border-[#8B5E3C]/40 p-6 bg-[#F5F0E8]">
-          <p className="placeholder-amber font-lato text-sm">
-            [MER INNHOLD OM JAKTTIDER OG REGLER KOMMER]
+        {/* Jakttider tabell */}
+        <div className="rounded-sm border border-[#2C2A1E]/10 bg-[#F5F0E8] p-6">
+          <h4 className="font-playfair text-lg text-[#2C2A1E] mb-4">Jakttider i Nord-Odal</h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-lato font-light text-[#5F5E5A]">
+            {[
+              { art: "🦌 Elg", tid: "Oktober" },
+              { art: "🦌 Rådyr / bukk", tid: "August – februar" },
+              { art: "🐺 Rev", tid: "Oktober – mars (+ januar-event)" },
+              { art: "🐇 Hare", tid: "Oktober – februar" },
+              { art: "🦢 Småvilt", tid: "Oktober – desember" },
+            ].map((row) => (
+              <div key={row.art} className="flex justify-between border-b border-[#2C2A1E]/10 pb-2">
+                <span>{row.art}</span>
+                <span className="text-[#3B5E2B]">{row.tid}</span>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-[#5F5E5A] mt-4 font-lato font-light">
+            Jakttider fastsettes av Miljødirektoratet og kan endres. Sjekk alltid gjeldende regler på{" "}
+            <a href="https://www.njff.no/hedmark/nordodal/jakt" target="_blank" rel="noopener noreferrer" className="text-[#3B5E2B] underline">
+              njff.no/hedmark/nordodal
+            </a>.
           </p>
         </div>
       </div>

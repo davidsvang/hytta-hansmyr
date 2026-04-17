@@ -40,11 +40,6 @@ const rules = [
     desc: "Innen kl. 12:00. Kjøkkenutstyr vaskes og settes på plass.",
   },
   {
-    icon: "🚧",
-    title: "Gjerdet",
-    desc: "Ikke gå inn bak gjerdet — privat område",
-  },
-  {
     icon: "💥",
     title: "Skader",
     desc: "Meldes til David umiddelbart. Ødeleggelser erstattes.",

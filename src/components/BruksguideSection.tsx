@@ -57,8 +57,8 @@ const guides = [
     title: "Vannpumpe",
     content: (
       <div className="space-y-3 text-[#5F5E5A] font-lato font-light text-sm leading-relaxed">
-        <div className="relative h-40 rounded-sm overflow-hidden mb-4">
-          <CabinImage src="/images/vannpumpe.jpeg" alt="Håndpumpe ved brønnen" fill className="object-cover" />
+        <div className="relative h-56 rounded-sm overflow-hidden mb-4">
+          <CabinImage src="/images/vannpumpe.jpeg" alt="Håndpumpe ved brønnen" fill className="object-cover object-bottom" />
         </div>
         <p>
           Vannet fra bekk og borebrønn er rent og trygt å drikke direkte.
