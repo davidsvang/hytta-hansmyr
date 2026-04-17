@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Hytta på Hansmyr <booking@hyttapahansmyr.no>",
+        from: "Hytta på Hansmyr <onboarding@resend.dev>",
         to: ["davidstakkengvang@gmail.com"],
         reply_to: epost,
         subject: `Bookingforespørsel: ${formatDate(innsjekk)} → ${formatDate(utsjekk)} (${netter} netter)`,
