@@ -79,13 +79,13 @@ export default function SoppBaerSection() {
 
         {/* Sopp-bilder grid */}
         <div className="grid grid-cols-2 gap-3 mb-8">
-          <div className="relative h-48 rounded-sm overflow-hidden">
+          <div className="relative aspect-[3/4] rounded-sm overflow-hidden">
             <CabinImage src="/images/kurver-med-kantarell.jpeg" alt="Kurver med kantarell" fill className="object-cover" />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-3">
               <p className="font-playfair italic text-white text-sm">Kantarell fra skogen</p>
             </div>
           </div>
-          <div className="relative h-48 rounded-sm overflow-hidden">
+          <div className="relative aspect-[3/4] rounded-sm overflow-hidden">
             <CabinImage src="/images/skog-for-sopp.jpeg" alt="Skogen rundt hytta" fill className="object-cover" />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-3">
               <p className="font-playfair italic text-white text-sm">Skogen på Hansmyr</p>
