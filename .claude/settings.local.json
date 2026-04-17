@@ -20,7 +20,23 @@
       "Bash(sips -g pixelWidth -g pixelHeight morten-liten-sommerfugl.jpeg)",
       "Bash(sips sommerfuggel-på-nesen.jpeg --cropOffset 660 75 -c 1200 1000 -o morten-liten-sommerfugl.jpeg)",
       "Bash(echo \"Klippet: $?\")",
-      "Bash(sips sommerfuggel-på-nesen.jpeg --cropOffset 760 75 -c 1110 1000 -o morten-liten-sommerfugl.jpeg)"
+      "Bash(sips sommerfuggel-på-nesen.jpeg --cropOffset 760 75 -c 1110 1000 -o morten-liten-sommerfugl.jpeg)",
+      "WebSearch",
+      "WebFetch(domain:www.wikidata.org)",
+      "WebFetch(domain:www.odalkano.com)",
+      "WebFetch(domain:odalsportalen.no)",
+      "WebFetch(domain:norway-streets.openalfa.com)",
+      "WebFetch(domain:norway.worldplaces.me)",
+      "WebFetch(domain:udisc.com)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/davidstakkengvang/hytta-hansmyr/public/images/morten-med-luftgever-stabburet-i-bakrunden.jpeg)",
+      "Bash(sips -g orientation /Users/davidstakkengvang/hytta-hansmyr/public/images/morten-med-luftgever-stabburet-i-bakrunden.jpeg)",
+      "Bash(sips morten-med-luftgever-stabburet-i-bakrunden.jpeg --cropOffset 0 700 -c 700 1536 -o /tmp/morten-test-mid.jpeg)",
+      "Bash(sips morten-med-luftgever-stabburet-i-bakrunden.jpeg --cropOffset 0 500 -c 800 1536 -o morten-luftgever-klippet.jpeg)",
+      "WebFetch(domain:www.njff.no)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/davidstakkengvang/hytta-hansmyr/public/images/kurver-med-kantarell.jpeg /Users/davidstakkengvang/hytta-hansmyr/public/images/skog-for-sopp.jpeg)",
+      "WebFetch(domain:www.visitnorway.com)",
+      "WebFetch(domain:idrettshallen.nord-odal.kommune.no)",
+      "WebFetch(domain:www.fotball.no)"
     ]
   }
 }
