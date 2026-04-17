@@ -29,36 +29,28 @@ export default function HistorienSection() {
               <p>Noen steder bærer på historier. Hytta på Hansmyr er et slikt sted.</p>
 
               <p>
-                Langt inne i skogen på Hansmyr, i det stille hjørnet av Nord-Odal
-                som de fleste kjører forbi uten å vite om, står en hytte som har
-                tilhørt familien Vang i generasjoner. Den ble bygd i 1854 av{" "}
-                <span className="placeholder-amber">[NAVN — venter på mormor]</span>
-                , og har siden den dag stått stille mens verden rundt har forandret seg.
+                Langt inne i skogen i Nord-Odal, i et stille hjørne av Innlandet,
+                ligger en eiendom som har tilhørt familien Stakkeng i generasjoner.
+                Hytta ble bygd i 1854 av{" "}
+                <span className="placeholder-amber">[NAVN — venter på info]</span>
+                , og har siden stått som et ankerpunkt for familien gjennom skiftende tider.
               </p>
 
               <p>
-                <span className="placeholder-amber">[ORIGINAL NAVN PÅ HYTTA — venter på mormor]</span>
+                Stabburet — det lille røde bygget like ved hytta — er også fra 1854,
+                og ble opprinnelig brukt som husmannsplass. Eiendommen var
+                selvforsynt med dyr og jord, og naturen rundt har alltid vært en
+                sentral del av hverdagen her.
               </p>
 
               <p>
-                Stabburet — det lille røde bygget ti meter fra hytta — er også fra
-                1854, og ble opprinnelig brukt som husmannsplass der familien var
-                selvforsynt med dyr og jord. Tidligere eide familien Linstad eiendommen.
+                I dag forvalter familien Stakkeng eiendommen med stor kjærlighet
+                og respekt for det som er bygget opp. Nå åpnes dørene for første
+                gang for gjester utenfra — slik at også andre kan oppleve roen,
+                naturen og den unike stemningen som råder på Hansmyr.
               </p>
 
-              <p>
-                Gjennom generasjoner har familien plukket blåbær fra den samme
-                skogbunnen og solgt dem i nærbutikken. Barna gikk alene i skogen
-                for å hente melk — redde for ulv og orm. Da tvillingene kom til
-                verden ble det stor stas i hele bygda.
-              </p>
-
-              <p>
-                I dag er det David Stakkeng Vang, 22 år, som fører tradisjonen
-                videre — og åpner dørene for første gang for gjester utenfra.
-              </p>
-
-              <p className="placeholder-amber">[MER INNHOLD KOMMER — venter på mormor]</p>
+              <p className="placeholder-amber">[MER INNHOLD KOMMER — legg gjerne til mer familiehistorie her]</p>
             </div>
 
             <div className="mt-10 pt-8 border-t border-[#2C2A1E]/10">
