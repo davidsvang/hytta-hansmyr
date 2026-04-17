@@ -51,15 +51,30 @@ const rules = [
   },
 ];
 
+import CabinImage from "./CabinImage";
+
 export default function HusreglerSection() {
   return (
     <section id="husregler" className="py-20 bg-[#F5F0E8]">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-12">
-          <p className="label-caps text-[#3B5E2B] mb-3">Husregler</p>
-          <h2 className="font-playfair text-4xl md:text-5xl text-[#2C2A1E]">
-            Vi tar vare på hverandre og hytta
-          </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-12">
+          <div>
+            <p className="label-caps text-[#3B5E2B] mb-3">Husregler</p>
+            <h2 className="font-playfair text-4xl md:text-5xl text-[#2C2A1E]">
+              Vi tar vare på hverandre og hytta
+            </h2>
+          </div>
+          <div className="relative h-52 rounded-sm overflow-hidden">
+            <CabinImage
+              src="/images/bålplass-foran-hytta.jpeg"
+              alt="Bålplass foran hytta"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#2C2A1E]/40 to-transparent flex items-end">
+              <p className="font-playfair italic text-white text-sm px-4 py-3">Bålplass foran hytta</p>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

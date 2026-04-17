@@ -5,6 +5,8 @@ const sleepingRooms = [
     desc: "Køyeseng: enkel nede + enkel oppe",
     beds: 2,
     featured: false,
+    image: "/images/stua-køyeseng.jpeg",
+    imageAlt: "Køyeseng i stuen",
   },
   {
     icon: "🛏️",
@@ -12,6 +14,8 @@ const sleepingRooms = [
     desc: "To køyesenger, alle enkle",
     beds: 4,
     featured: false,
+    image: "/images/dør-til-soverom-4-single.jpeg",
+    imageAlt: "Soverom med fire senger",
   },
   {
     icon: "🏚️",
@@ -19,6 +23,8 @@ const sleepingRooms = [
     desc: "En enkel seng + køyeseng",
     beds: 3,
     featured: true,
+    image: "/images/stabburet.jpeg",
+    imageAlt: "Stabburet utenfra",
   },
 ];
 
@@ -41,6 +47,8 @@ const facilities = [
   { icon: "🪑", title: "Utemøbler", desc: "Benker og bord ute" },
 ];
 
+import CabinImage from "./CabinImage";
+
 export default function HyttenSection() {
   return (
     <section id="hytten" className="py-20 bg-white">
@@ -58,18 +66,23 @@ export default function HyttenSection() {
           {sleepingRooms.map((room) => (
             <div
               key={room.title}
-              className={`rounded-sm p-6 border ${
+              className={`rounded-sm border overflow-hidden ${
                 room.featured
-                  ? "border-[#3B5E2B] bg-[#EAF3DE]"
-                  : "border-[#2C2A1E]/10 bg-[#F5F0E8]"
+                  ? "border-[#3B5E2B]"
+                  : "border-[#2C2A1E]/10"
               } relative`}
             >
-              {room.featured && (
-                <span className="absolute top-4 right-4 label-caps bg-[#3B5E2B] text-white px-2 py-1 rounded text-[10px]">
-                  Kan leies separat
-                </span>
-              )}
-              <div className="text-3xl mb-4">{room.icon}</div>
+              {/* Room image */}
+              <div className="relative h-44">
+                <CabinImage src={room.image} alt={room.imageAlt} fill className="object-cover" />
+                {room.featured && (
+                  <span className="absolute top-3 right-3 label-caps bg-[#3B5E2B] text-white px-2 py-1 rounded text-[10px]">
+                    Kan leies separat
+                  </span>
+                )}
+              </div>
+              <div className={`p-5 ${room.featured ? "bg-[#EAF3DE]" : "bg-[#F5F0E8]"}`}>
+              <div className="text-2xl mb-2">{room.icon}</div>
               <h3 className="font-playfair text-xl text-[#2C2A1E] mb-2">
                 {room.title}
               </h3>
@@ -89,6 +102,7 @@ export default function HyttenSection() {
                   {room.beds} senger
                 </span>
               </div>
+              </div>
             </div>
           ))}
         </div>
@@ -102,6 +116,28 @@ export default function HyttenSection() {
             </div>
             <div className="label-caps text-[#5F5E5A]">
               Hytte + stabbur
+            </div>
+          </div>
+        </div>
+
+        {/* Interiør-bildestrip */}
+        <div className="grid grid-cols-3 gap-3 mb-16 h-52">
+          <div className="relative rounded-sm overflow-hidden">
+            <CabinImage src="/images/lite-praktisk-kjøkken.jpeg" alt="Kjøkkenet" fill className="object-cover" />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-3">
+              <p className="font-playfair italic text-white text-sm">Kjøkkenet</p>
+            </div>
+          </div>
+          <div className="relative rounded-sm overflow-hidden">
+            <CabinImage src="/images/liten-tv-i-stuen.jpeg" alt="Stuen med TV" fill className="object-cover" />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-3">
+              <p className="font-playfair italic text-white text-sm">Stuen</p>
+            </div>
+          </div>
+          <div className="relative rounded-sm overflow-hidden">
+            <CabinImage src="/images/inngangsdør-ved-kjøkkenet.jpeg" alt="Inngangsdøren" fill className="object-cover" />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-3">
+              <p className="font-playfair italic text-white text-sm">Inngang</p>
             </div>
           </div>
         </div>

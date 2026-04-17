@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import CabinImage from "./CabinImage";
 
 const guides = [
   {
@@ -28,15 +29,25 @@ const guides = [
   {
     icon: "🔥",
     title: "Vedovn",
-    content: null,
-    comingSoon: true,
-    placeholder: "Guide for opptenning av vedovn kommer snart.",
+    content: (
+      <div className="space-y-3 text-[#5F5E5A] font-lato font-light text-sm leading-relaxed">
+        <div className="relative h-40 rounded-sm overflow-hidden mb-4">
+          <CabinImage src="/images/fyr-i-peisen-stua.jpeg" alt="Fyr i peisen" fill className="object-cover" />
+        </div>
+        <p className="placeholder-amber">[TRINN-FOR-TRINN GUIDE KOMMER — David fyller inn]</p>
+      </div>
+    ),
+    comingSoon: false,
+    placeholder: null,
   },
   {
     icon: "💧",
     title: "Vannpumpe",
     content: (
       <div className="space-y-3 text-[#5F5E5A] font-lato font-light text-sm leading-relaxed">
+        <div className="relative h-40 rounded-sm overflow-hidden mb-4">
+          <CabinImage src="/images/vannpumpe.jpeg" alt="Håndpumpe ved brønnen" fill className="object-cover" />
+        </div>
         <p>
           Vannet fra bekk og borebrønn er rent og trygt å drikke direkte.
           Håndpumpen er ved{" "}

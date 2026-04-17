@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
+
+const KartMedPins = dynamic(() => import("./KartMedPins"), { ssr: false });
 
 type Season = "Alle" | "Sommer" | "Høst" | "Vinter" | "Kultur" | "Jakt";
 
@@ -184,24 +187,7 @@ export default function AktiviteterSection() {
         </div>
 
         {/* Map section */}
-        <div className="rounded-sm overflow-hidden border border-[#2C2A1E]/10">
-          <div className="bg-[#F5F0E8] px-6 py-4 border-b border-[#2C2A1E]/10">
-            <h3 className="font-playfair text-xl text-[#2C2A1E]">Kart over området</h3>
-            <p className="text-[#5F5E5A] font-lato font-light text-sm mt-1">
-              Hansmyrvegen 293, 2120 Sagstua, Nord-Odal
-            </p>
-          </div>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2000!2d11.436473!3d60.4058517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNjDCsDI0JzIxLjEiTiAxMcKwMjYnMTEuMyJF!5e0!3m2!1sno!2sno!4v1"
-            width="100%"
-            height="400"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Kart — Hytta på Hansmyr"
-          />
-        </div>
+        <KartMedPins />
       </div>
     </section>
   );

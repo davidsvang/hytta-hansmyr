@@ -10,7 +10,17 @@
       "Bash(curl -s http://localhost:3000)",
       "mcp__Claude_Preview__preview_start",
       "Bash(pkill -f \"next dev\")",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(sips -g pixelWidth -g pixelHeight sommerfuggel-på-nesen.jpeg)",
+      "Bash(sips -g pixelWidth -g pixelHeight morten-med-luftgever-stabburet-i-bakrunden.jpeg)",
+      "Bash(sips sommerfuggel-på-nesen.jpeg --cropOffset 370 60 -c 1430 1030 -o morten-liten-sommerfugl.jpeg)",
+      "Bash(echo \"Sommerfugl klippet: $?\")",
+      "Bash(sips morten-med-luftgever-stabburet-i-bakrunden.jpeg --cropOffset 0 0 -c 1150 1536 -o morten-luftgever-klippet.jpeg)",
+      "Bash(echo \"Morten klippet: $?\")",
+      "Bash(sips -g pixelWidth -g pixelHeight morten-liten-sommerfugl.jpeg)",
+      "Bash(sips sommerfuggel-på-nesen.jpeg --cropOffset 660 75 -c 1200 1000 -o morten-liten-sommerfugl.jpeg)",
+      "Bash(echo \"Klippet: $?\")",
+      "Bash(sips sommerfuggel-på-nesen.jpeg --cropOffset 760 75 -c 1110 1000 -o morten-liten-sommerfugl.jpeg)"
     ]
   }
 }

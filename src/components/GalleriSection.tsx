@@ -1,21 +1,41 @@
 import CabinImage from "./CabinImage";
 
 const row1 = [
-  { src: "/images/IMG_6860.jpeg", alt: "Innkjørselen til hytta", caption: "Innkjørselen", wide: true },
-  { src: "/images/IMG_6861.jpeg", alt: "Blomstereng med benk", caption: "Blomstereng", wide: false },
-  { src: "/images/IMG_6864.jpeg", alt: "Hestene på tunet", caption: "Hestene", wide: false },
+  { src: "/images/forsiden.jpeg", alt: "Forsiden av Hytta på Hansmyr", caption: "Hytta på Hansmyr", span: "col-span-2" },
+  { src: "/images/engen-på-forsiden.jpeg", alt: "Blomstereng på forsiden", caption: "Blomstereng", span: "" },
+  { src: "/images/snille-hester.jpeg", alt: "Hestene på tunet", caption: "Hestene", span: "" },
 ];
 
 const row2 = [
-  { src: "/images/IMG_0185.jpeg", alt: "Stuen innendørs", caption: "Stuen" },
-  { src: "/images/IMG_0183.jpeg", alt: "Morfar på verandaen", caption: "Verandaen" },
-  { src: "/images/IMG_0197.jpeg", alt: "Vedhugging med øks", caption: "Vedhugging" },
-  { src: "/images/IMG_6881.jpeg", alt: "Frokost på verandaen", caption: "Frokost" },
+  { src: "/images/soffa-i-stuen.jpeg", alt: "Stuen innendørs", caption: "Stuen" },
+  { src: "/images/veranda-på-forsiden.jpeg", alt: "Verandaen", caption: "Verandaen" },
+  { src: "/images/gutta-jobber-med-motorsag.jpeg", alt: "Vedhugging", caption: "Vedhugging" },
+  { src: "/images/selvplukket-blomsterbukett.jpeg", alt: "Selvplukket blomsterbukett", caption: "Skogens blomster" },
 ];
 
 const row3 = [
-  { src: null, alt: "Stabburet — bilde mangler", caption: "Stabburet", wide: false },
-  { src: "/images/IMG_6886.jpeg", alt: "Storsjøen badestrand", caption: "Storsjøen", wide: true },
+  { src: "/images/stabburet.jpeg", alt: "Stabburet", caption: "Stabburet", span: "" },
+  { src: "/images/landskapet-om-høsten.jpeg", alt: "Høstlandskapet rundt hytta", caption: "Høst på Hansmyr", span: "col-span-2" },
+];
+
+const row4 = [
+  { src: "/images/hester-på-verandaen.jpeg", alt: "Hester ved verandaen", caption: "Hester ved hytta" },
+  { src: "/images/bålplass-foran-hytta.jpeg", alt: "Bålplass foran hytta", caption: "Bålkveld" },
+  { src: "/images/bekken.jpeg", alt: "Bekken ved hytta", caption: "Bekken" },
+  { src: "/images/peis-i-stua.jpeg", alt: "Peisen i stuen", caption: "Peiskos" },
+];
+
+const row5 = [
+  { src: "/images/hvit-svart-og-brun-hest.jpeg", alt: "Tre hester på tunet", caption: "Tre hester", span: "col-span-2" },
+  { src: "/images/forsiden-inngjeret.jpeg", alt: "Hytta med inngjeret", caption: "Inngjeret", span: "" },
+  { src: "/images/to-hester.jpeg", alt: "To hester på beite", caption: "To hester", span: "" },
+];
+
+const row6 = [
+  { src: "/images/morten-liten-sommerfugl.jpeg", alt: "Morten som liten med sommerfugl på nesen", caption: "Sommerfugl på nesen", span: "" },
+  { src: "/images/peis-som-varmer.jpeg", alt: "Peisen som varmer", caption: "Vinterkos", span: "" },
+  { src: "/images/venstre-side-solcellepanel.jpeg", alt: "Solcellepanel på hytta", caption: "Solenergi", span: "" },
+  { src: "/images/forsiden-fra-venstre.jpeg", alt: "Hytta fra venstre", caption: "Hytta på Hansmyr", span: "" },
 ];
 
 function GalleryImage({
@@ -41,12 +61,9 @@ function GalleryImage({
       ) : (
         <div className="absolute inset-0 bg-[#2C2A1E]/10 flex flex-col items-center justify-center">
           <div className="text-3xl mb-2">📷</div>
-          <p className="label-caps text-[#5F5E5A] text-center px-4">
-            Bilde kommer
-          </p>
+          <p className="label-caps text-[#5F5E5A] text-center px-4">Bilde kommer</p>
         </div>
       )}
-      {/* Hover overlay */}
       {src && (
         <div className="absolute inset-0 bg-[#2C2A1E]/0 group-hover:bg-[#2C2A1E]/50 transition-all duration-300 flex items-end">
           <p className="font-playfair italic text-white text-lg px-5 py-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
@@ -71,36 +88,44 @@ export default function GalleriSection() {
 
         {/* Row 1 — 2fr + 1fr + 1fr */}
         <div className="grid grid-cols-4 gap-3 mb-3 h-72">
-          <GalleryImage
-            src={row1[0].src}
-            alt={row1[0].alt}
-            caption={row1[0].caption}
-            className="col-span-2"
-          />
-          <GalleryImage src={row1[1].src} alt={row1[1].alt} caption={row1[1].caption} />
-          <GalleryImage src={row1[2].src} alt={row1[2].alt} caption={row1[2].caption} />
+          {row1.map((img) => (
+            <GalleryImage key={img.src} src={img.src} alt={img.alt} caption={img.caption} className={img.span} />
+          ))}
         </div>
 
         {/* Row 2 — 4 equal */}
-        <div className="grid grid-cols-4 gap-3 mb-3 h-60">
+        <div className="grid grid-cols-4 gap-3 mb-3 h-56">
           {row2.map((img) => (
             <GalleryImage key={img.src} src={img.src} alt={img.alt} caption={img.caption} />
           ))}
         </div>
 
         {/* Row 3 — 1fr + 2fr */}
-        <div className="grid grid-cols-3 gap-3 h-72">
-          <GalleryImage
-            src={row3[0].src}
-            alt={row3[0].alt}
-            caption={row3[0].caption}
-          />
-          <GalleryImage
-            src={row3[1].src}
-            alt={row3[1].alt}
-            caption={row3[1].caption}
-            className="col-span-2"
-          />
+        <div className="grid grid-cols-3 gap-3 mb-3 h-64">
+          {row3.map((img) => (
+            <GalleryImage key={img.src} src={img.src} alt={img.alt} caption={img.caption} className={img.span} />
+          ))}
+        </div>
+
+        {/* Row 4 — 4 equal */}
+        <div className="grid grid-cols-4 gap-3 mb-3 h-56">
+          {row4.map((img) => (
+            <GalleryImage key={img.src} src={img.src} alt={img.alt} caption={img.caption} />
+          ))}
+        </div>
+
+        {/* Row 5 — 2fr + 1fr + 1fr */}
+        <div className="grid grid-cols-4 gap-3 mb-3 h-64">
+          {row5.map((img) => (
+            <GalleryImage key={img.src} src={img.src} alt={img.alt} caption={img.caption} className={img.span} />
+          ))}
+        </div>
+
+        {/* Row 6 — 4 equal */}
+        <div className="grid grid-cols-4 gap-3 h-56">
+          {row6.map((img) => (
+            <GalleryImage key={img.src} src={img.src} alt={img.alt} caption={img.caption} className={img.span} />
+          ))}
         </div>
 
         {/* Instagram placeholder */}

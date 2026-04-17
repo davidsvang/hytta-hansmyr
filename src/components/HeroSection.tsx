@@ -66,8 +66,8 @@ export default function HeroSection() {
         {/* Right — image */}
         <div className="relative bg-[#2C3D1E] min-h-[50vh] md:min-h-0">
           <CabinImage
-            src="/images/IMG_6860.jpeg"
-            alt="Innkjørselen til Hytta på Hansmyr"
+            src="/images/forsiden-av-hytta.jpeg"
+            alt="Forsiden av Hytta på Hansmyr"
             fill
             className="object-cover opacity-80"
             priority

@@ -1,3 +1,5 @@
+import CabinImage from "./CabinImage";
+
 export default function JaktFiskeSection() {
   return (
     <section id="jakt" className="py-20 bg-white">
@@ -7,6 +9,21 @@ export default function JaktFiskeSection() {
           <h2 className="font-playfair text-4xl md:text-5xl text-[#2C2A1E]">
             Et eldorado i villmarken
           </h2>
+        </div>
+
+        {/* Hero-bilde jakt */}
+        <div className="relative h-72 rounded-sm overflow-hidden mb-10">
+          <CabinImage
+            src="/images/morten-luftgever-klippet.jpeg"
+            alt="Jakt ved stabburet"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2C2A1E]/60 to-transparent flex items-end">
+            <p className="font-playfair italic text-white text-xl p-8">
+              Stabburet i bakgrunnen — midt i villmarken
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
@@ -49,15 +66,11 @@ export default function JaktFiskeSection() {
               </li>
               <li className="flex gap-3">
                 <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
-                <span>
-                  Kontakt Nord-Odal Jakt- og Fiskeforening for jaktkort og info
-                </span>
+                <span>Kontakt Nord-Odal Jakt- og Fiskeforening for jaktkort og info</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
-                <span>
-                  Den store revejakta: Årlig arrangement med 300+ jegere
-                </span>
+                <span>Den store revejakta: Årlig arrangement med 300+ jegere</span>
               </li>
             </ul>
           </div>
