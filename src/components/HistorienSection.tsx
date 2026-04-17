@@ -29,12 +29,30 @@ export default function HistorienSection() {
               <p>Noen steder bærer på historier. Hytta på Hansmyr er et slikt sted.</p>
 
               <p>
-                Eiendommen har tilhørt familien Stakkeng i generasjoner — bygd i 1854,
-                og siden stått som et stille ankerpunkt i Nord-Odal-skogen.
-                Nå åpnes dørene for nye naturnytere.
+                Langt inne i skogen på Hansmyr, i det stille hjørnet av Nord-Odal
+                som de fleste kjører forbi uten å vite om, står en hytte som har
+                tilhørt familien Stakkeng i generasjoner. Den ble bygd i 1854 av{" "}
+                <span className="placeholder-amber">[NAVN — venter på mormor]</span>
+                , og har siden den dag stått stille mens verden rundt har forandret seg.
               </p>
 
-              <div className="mt-2 rounded-sm border border-dashed border-[#8B5E3C]/40 p-4 bg-[#F5F0E8]">
+              <p>
+                <span className="placeholder-amber">[ORIGINAL NAVN PÅ HYTTA — venter på mormor]</span>
+              </p>
+
+              <p>
+                Stabburet — det lille røde bygget ti meter fra hytta — er også fra
+                1854, og ble opprinnelig brukt som husmannsplass der familien var
+                selvforsynt med dyr og jord. Tidligere eide familien Linstad eiendommen.
+              </p>
+
+              <p>
+                I dag åpnes dørene for første gang for gjester utenfra — slik at
+                også andre kan oppleve roen, naturen og den unike stemningen som
+                råder på Hansmyr.
+              </p>
+
+              <div className="rounded-sm border border-dashed border-[#8B5E3C]/40 p-4 bg-[#F5F0E8]">
                 <p className="placeholder-amber text-sm">Mer familiehistorie legges til senere.</p>
               </div>
             </div>

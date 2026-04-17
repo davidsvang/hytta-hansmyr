@@ -17,7 +17,7 @@ export default function JaktFiskeSection() {
             src="/images/morten-luftgever-klippet.jpeg"
             alt="Jakt ved stabburet"
             fill
-            className="object-cover object-top"
+            className="object-cover object-[center_60%]"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#2C2A1E]/60 to-transparent flex items-end">
             <p className="font-playfair italic text-white text-xl p-8">
@@ -34,19 +34,23 @@ export default function JaktFiskeSection() {
             <ul className="space-y-3 text-[#5F5E5A] font-lato font-light text-sm">
               <li className="flex gap-3">
                 <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
-                <span>Storsjøen: Gratis fiske, intet fiskekort nødvendig</span>
+                <span><strong>Storsjøen</strong> (10 min): Gratis fiske, intet fiskekort nødvendig. En av Innlandets største og mest fiskerike sjøer — ca. 50 km² med gjedde, abbor, ørret, brasme og mort</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
-                <span>En av landets mest fiskerike sjøer</span>
+                <span><strong>Mosjøen</strong> (20 min): Abbor og gjedde. Fiskekort kjøpes via inatur.no eller lokale grunneiere</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
-                <span>Gjedde, abbor, ørret og mer</span>
+                <span><strong>Skjervangen og Bjørnsjøen</strong>: Mindre skogssjøer i nærområdet — god ørretfiske i rolige omgivelser</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
-                <span>Guidede fisketurer: Odal Fritid & Turistservice</span>
+                <span>Fiskesesong: hele året — isfiske om vinteren er populært på Storsjøen</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
+                <span>Guidede fisketurer og kanopadling: Odal Kano og Fritid — tlf. +47 98 06 16 69</span>
               </li>
             </ul>
           </div>
