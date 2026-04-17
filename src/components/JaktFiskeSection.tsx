@@ -38,11 +38,7 @@ export default function JaktFiskeSection() {
               </li>
               <li className="flex gap-3">
                 <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
-                <span><strong>Mosjøen</strong> (20 min): Abbor og gjedde. Fiskekort kjøpes via inatur.no eller lokale grunneiere</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>
-                <span><strong>Skjervangen og Bjørnsjøen</strong>: Mindre skogssjøer i nærområdet — god ørretfiske i rolige omgivelser</span>
+                <span><strong>Råsen</strong> (15 min): 2,3 km² innsjø nær Sand — gjedde, abbor, brasme og ørret. Fiskekort via grunneier</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-[#3B5E2B] flex-shrink-0 mt-0.5">—</span>

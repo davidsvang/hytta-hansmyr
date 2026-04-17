@@ -56,7 +56,23 @@ const locations = [
     emoji: "⛷️",
     lat: 60.39742,
     lng: 11.53683,
-    desc: "30 km preparerte skiløyper. Diskgolf 10 hull.",
+    desc: "30 km preparerte skiløyper, diskgolf 10 hull, skøytebane.",
+    primary: false,
+  },
+  {
+    name: "Trebåten VB54 — Mo brygge",
+    emoji: "⛵",
+    lat: 60.4238,
+    lng: 11.6375,
+    desc: "Historisk trebåt på Storsjøen. Søndager 20. juni–22. aug fra Mo brygge kl. 14.",
+    primary: false,
+  },
+  {
+    name: "Råsen — fiske",
+    emoji: "🎣",
+    lat: 60.4082,
+    lng: 11.5028,
+    desc: "2,3 km² innsjø i Nord-Odal. Gjedde, abbor, brasme og ørret. Fiskekort via grunneier.",
     primary: false,
   },
 ];
@@ -70,7 +86,7 @@ export default function KartMedPins() {
       if (!mapEl || (mapEl as HTMLElement & { _leaflet_id?: number })._leaflet_id) return;
 
       const map = L.map("aktiviteter-kart", {
-        center: [60.390, 11.570],
+        center: [60.400, 11.560],
         zoom: 11,
         scrollWheelZoom: false,
         zoomControl: true,
