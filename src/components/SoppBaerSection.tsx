@@ -44,12 +44,12 @@ export default function SoppBaerSection() {
 
           {/* Sopp */}
           <div className="bg-white rounded-sm border border-[#2C2A1E]/10 overflow-hidden">
-            <div className="relative h-52">
+            <div className="relative h-80">
               <CabinImage
                 src="/images/kilovis-med-kanttarell.jpeg"
                 alt="Kilovis med kantarell fra skogen"
                 fill
-                className="object-cover"
+                className="object-contain"
               />
             </div>
             <div className="p-6">
