@@ -39,3 +39,6 @@ next-env.d.ts
 # Claude Code working directory
 # Intentional inclusions (e.g. .claude/settings.json) must be force-added: git add -f
 .claude/
+
+# Personal LLM Wiki / "second brain" exports — not for repo
+.brain-export.md
