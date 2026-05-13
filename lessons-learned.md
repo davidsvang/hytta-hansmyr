@@ -17,5 +17,7 @@ Transferable learnings from this project. Synced to the brain vault at `~/All Cl
 ## Process
 <!-- Planning patterns, debugging approaches, discipline rules, what to do/not do. -->
 
+- [ ] 2026-05-12 — CLAUDE.md is a pointer file (`@AGENTS.md` + `WIKI_PATH`), must stay ≤ 5 lines forever. All project content goes to AGENTS.md. If they start fighting, the rule was broken.
+
 ## Tool
 <!-- Specific tools and libraries: what they're good for, what they're not, version-specific notes. -->
