@@ -10,7 +10,7 @@ const tags = [
 ];
 
 const stats = [
-  { value: "9", label: "Soveplasser" },
+  { value: "10", label: "Soveplasser" },
   { value: "2", label: "Bygninger" },
   { value: "1,5t", label: "Fra Oslo" },
 ];
@@ -30,7 +30,7 @@ export default function HeroSection() {
             <em className="text-[#3B5E2B] italic">villskogen</em>
           </h1>
           <p className="text-[#5F5E5A] text-lg mb-8 max-w-md leading-relaxed font-lato font-light">
-            En autentisk norsk skogshytte for 9 gjester — med hester på tunet,
+            En autentisk norsk skogshytte for 10 gjester — med hester på tunet,
             blomsterenger og naturen som nærmeste nabo. 1,5 time fra Oslo.
           </p>
 
@@ -93,7 +93,7 @@ export default function HeroSection() {
       <div className="bg-[#3B5E2B] text-white py-4 px-6">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-2 md:gap-8 text-center">
           {[
-            "9 soveplasser",
+            "10 soveplasser",
             "Hytte + stabbur",
             "Familieeid siden 1854",
             "Automatisert booking",

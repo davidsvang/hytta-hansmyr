@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.command // empty' | grep -qE '^[[:space:]]*git[[:space:]]+commit([[:space:]]|$)' && echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"Code committed. Per hansmyrhytta workflow rule, spawn the code-review subagent now before ending the turn. Skip only if the commit is docs-only and Claude has explicitly verified no src/ files changed.\"}}' || true"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "grep -qiE 'end session|wrap up|park( the)? session|draft lessons|push everything|end of session' && echo '{\"hookSpecificOutput\":{\"hookEventName\":\"UserPromptSubmit\",\"additionalContext\":\"End-of-session signal detected. Per hansmyrhytta workflow: (1) spawn lesson-draft subagent, (2) update ~/All Claude/brain/hot.md with current state, (3) push repo + brain vault to remote, (4) status report to David.\"}}' || true"
+          }
+        ]
+      }
+    ]
+  }
+}

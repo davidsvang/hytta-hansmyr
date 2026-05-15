@@ -18,6 +18,7 @@ Transferable learnings from this project. Synced to the brain vault at `~/All Cl
 <!-- Planning patterns, debugging approaches, discipline rules, what to do/not do. -->
 
 - [ ] 2026-05-12 — CLAUDE.md is a pointer file (`@AGENTS.md` + `WIKI_PATH`), must stay ≤ 5 lines forever. All project content goes to AGENTS.md. If they start fighting, the rule was broken.
+- [x] 2026-05-15 — Source-of-truth numbers (sleeping capacity, dimensions, physical dates, address coordinates) must be verified at the source (physical, official) before they propagate. A wrong "9 soveplasser" estimate landed in `src/app/layout.tsx` meta description, `src/components/HeroSection.tsx` (stat block + body copy + green-strip feature list) — 4 hits across 2 files in the repo alone. Once a number lives in N files, every correction is a project-wide grep + replace + commit. Mitigation: when capturing a source-of-truth number for the first time, mark it `// SOURCE-OF-TRUTH: verified physically YYYY-MM-DD` at the canonical definition site, and reference that constant from all other usages rather than re-stating the number. Worth promoting to a brain lesson.
 
 ## Tool
 <!-- Specific tools and libraries: what they're good for, what they're not, version-specific notes. -->

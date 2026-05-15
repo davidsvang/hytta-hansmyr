@@ -18,7 +18,7 @@ const lato = Lato({
 export const metadata: Metadata = {
   title: "Hytta på Hansmyr — Skogshytte i Nord-Odal",
   description:
-    "En autentisk norsk skogshytte for 9 gjester i Nord-Odal, Innlandet. Med hester på tunet, blomsterenger og Storsjøen 10 minutter unna. 1,5 time fra Oslo.",
+    "En autentisk norsk skogshytte for 10 gjester i Nord-Odal, Innlandet. Med hester på tunet, blomsterenger og Storsjøen 10 minutter unna. 1,5 time fra Oslo.",
   keywords: ["hytteutleie", "Nord-Odal", "skogshytte", "Innlandet", "Sagstua", "ferie", "Storsjøen"],
   openGraph: {
     title: "Hytta på Hansmyr",
