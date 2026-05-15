@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "jq -r '.tool_input.command // empty' | grep -qE '^[[:space:]]*git[[:space:]]+commit([[:space:]]|$)' && echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"Code committed. Per hansmyrhytta workflow rule, spawn the code-review subagent now before ending the turn. Skip only if the commit is docs-only and Claude has explicitly verified no src/ files changed.\"}}' || true"
+            "command": "jq -r '.tool_input.command // empty' | grep -qE '(^|[^[:alnum:]_-])git commit([[:space:]]|$)' && echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"Code committed. Per hansmyrhytta workflow rule, spawn the code-review subagent now before ending the turn. Skip only if the commit is docs-only and Claude has explicitly verified no src/ files changed.\"}}' || true"
           }
         ]
       }
