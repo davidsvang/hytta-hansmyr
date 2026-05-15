@@ -20,13 +20,22 @@ const sleepingRooms = [
   {
     icon: "🏚️",
     title: "Stabburet",
+    // TODO: verify exact sleeping layout on next cabin visit. Bed count = 4
+    // confirmed by David 2026-05-15 (corrected from earlier 3-estimate); the
+    // textual desc below may need an update once the physical layout is
+    // recounted (e.g. could be 2 køyesenger, or 1 enkel + 1 trippelkøyeseng).
     desc: "En enkel seng + køyeseng",
-    beds: 3,
+    beds: 4,
     featured: true,
     image: "/images/stabburet.jpeg",
     imageAlt: "Stabburet utenfra",
   },
 ];
+
+// Derived from the structured data above. Must match MAKS_GJESTER in
+// src/lib/pricing.ts; if it doesn't, either the bed layout above is wrong
+// or the booking cap is wrong — both are source-of-truth values.
+const totalSoveplasser = sleepingRooms.reduce((acc, r) => acc + r.beds, 0);
 
 const facilities = [
   { icon: "💧", title: "Rent kildevann", desc: "Bekk + borebrønn med håndpumpe" },
@@ -109,7 +118,7 @@ export default function HyttenSection() {
 
         {/* Total beds badge */}
         <div className="flex items-center gap-4 mb-12 p-4 bg-[#EAF3DE] rounded-sm border border-[#3B5E2B]/20 max-w-sm">
-          <span className="font-playfair text-4xl text-[#3B5E2B]">9</span>
+          <span className="font-playfair text-4xl text-[#3B5E2B]">{totalSoveplasser}</span>
           <div>
             <div className="font-lato font-light text-[#2C2A1E]">
               Totalt soveplasser

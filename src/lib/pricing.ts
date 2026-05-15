@@ -9,6 +9,14 @@ const PRIS_HELG = 1900;     // fre–søn
 const PRIS_LANGHELG = 4800; // 3 netter flat
 const PRIS_UKE = 8500;      // 7 netter flat
 
+// SOURCE-OF-TRUTH: 6 hytte + 4 stabbur = 10. Confirmed by David 2026-05-15
+// (corrected from initial 9-estimate). Exact bed distribution within stabbur
+// pending physical verification on next cabin visit. Sum of beds in
+// HyttenSection.tsx#sleepingRooms must match this value — drift is a bug.
+// Reversal: this is the booking cap, not a soft policy; lower only with a
+// new physical recount or an explicit policy decision.
+export const MAKS_GJESTER = 10;
+
 export function beregnPris(innsjekk: string, utsjekk: string): PriceBreakdown {
   const start = new Date(innsjekk);
   const end = new Date(utsjekk);

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import type { BookingRange } from "@/lib/redis";
-import { beregnPris, formaterPris } from "@/lib/pricing";
+import { beregnPris, formaterPris, MAKS_GJESTER } from "@/lib/pricing";
 
 const prices = [
   {
@@ -316,7 +316,7 @@ export default function BookingSection() {
                     onChange={handleChange}
                     className="w-full border border-[#2C2A1E]/20 rounded-sm px-3 py-2 font-lato font-light text-sm text-[#2C2A1E] bg-[#F5F0E8] focus:outline-none focus:border-[#3B5E2B]"
                   >
-                    {Array.from({ length: 9 }, (_, i) => i + 1).map((n) => (
+                    {Array.from({ length: MAKS_GJESTER }, (_, i) => i + 1).map((n) => (
                       <option key={n} value={n}>
                         {n} {n === 1 ? "gjest" : "gjester"}
                       </option>
