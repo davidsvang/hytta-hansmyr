@@ -58,7 +58,7 @@ export default function SoppBaerSection() {
               <dl className="space-y-3">
                 <div className="flex gap-4">
                   <dt className="label-caps text-[#5F5E5A] w-20 flex-shrink-0">Sesong</dt>
-                  <dd className="text-[#2C2A1E] font-lato font-light text-sm">Juli til første frost (høysesong august–oktober)</dd>
+                  <dd className="text-[#2C2A1E] font-lato font-light text-sm">Sensommer til etter første frost (best i oktober og november)</dd>
                 </div>
                 <div className="flex gap-4">
                   <dt className="label-caps text-[#5F5E5A] w-20 flex-shrink-0">Typer</dt>
@@ -74,6 +74,25 @@ export default function SoppBaerSection() {
                 </div>
               </dl>
             </div>
+          </div>
+        </div>
+
+        {/* Mormors råd — family knowledge callout, sits between the fact cards
+            and the bilder grid because it directly elaborates on the Sopp SESONG field. */}
+        <div className="bg-white rounded-sm border border-[#3B5E2B]/20 p-6 mb-12">
+          <p className="label-caps text-[#3B5E2B] mb-2">Familiekunnskap</p>
+          <h3 className="font-playfair text-2xl text-[#2C2A1E] mb-4">Mormors råd</h3>
+          <div className="space-y-3 text-[#5F5E5A] font-lato font-light text-sm leading-relaxed">
+            <p>
+              Mormor og søsteren Liv har plukket sopp i denne skogen i over 70
+              år. De er bestemte på når den beste tida er: senere enn de fleste
+              tror. Slutten av oktober, begynnelsen av november, ofte rett før
+              eller etter den første nattefrosten.
+            </p>
+            <p>
+              Frosset sopp er like bra som ufrosset, ifølge dem. Så ikke gi opp
+              om termometeret faller.
+            </p>
           </div>
         </div>
 

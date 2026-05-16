@@ -45,12 +45,19 @@ const activities = [
     badge: "Mid-juli – aug",
   },
   {
+    icon: "🐸",
+    title: "Bekken på forsiden",
+    distance: "100 m fra hytta",
+    desc: "Liten skogsbekk. Mest for småbarn som vil finne kryp og dyppe føttene. Vannstanden varierer.",
+    seasons: ["Sommer"] as Season[],
+  },
+  {
     icon: "🍄",
     title: "Soppsanking",
     distance: "I skogen rundt",
-    desc: "Juli til første frost. Høysesong august–oktober",
-    seasons: ["Høst", "Sommer"] as Season[],
-    badge: "Aug – okt",
+    desc: "Sensommer til etter første frost. Best i oktober og november",
+    seasons: ["Høst"] as Season[],
+    badge: "Okt – nov",
   },
   {
     icon: "🥾",
