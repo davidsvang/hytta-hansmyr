@@ -25,6 +25,9 @@ Transferable learnings from this project. Synced to the brain vault at `~/All Cl
 ## Tool
 <!-- Specific tools and libraries: what they're good for, what they're not, version-specific notes. -->
 
+- [x] 2026-05-16 — Domain-expertise content (sopp season, foraging timing, route conditions) drifts from AI scaffolding the same way physical numbers do — but it reads as fluent so it survives review. Primary-source pass against a domain expert (mormor + Liv interview) corrected sopp SESONG from "Juli til første frost (høysesong august–oktober)" → "Sensommer til etter første frost (best i oktober og november)", cascaded to AktiviteterSection (badge, desc, seasons array filter). Quoting the source in the user-facing content ("Mormors råd" callout naming "70+ år") converts the fact from anonymous claim to attributed knowledge. Captured as [[primary-source-correction-of-ai-guessed-domain-facts]].
+- [x] 2026-05-16 — When one canonical source (interview transcript, spec doc, design decision) flows to multiple consuming sections, the discipline is: plan per-section extracts in plan.md → edit one file at a time complete-pass → cross-section consistency grep for invariants → single atomic commit. Today's mormor + Liv interview flowed to HistorienSection + SoppBaerSection + AktiviteterSection; the sopp-season text was an invariant that had to match across SoppBaer (SESONG field) and Aktiviteter (Soppsanking desc). Without the consistency grep, the correction could have shipped in one section but been forgotten in the other. Sister to the source-of-truth-numbers derive-don't-restate property — that's the mechanism for numerics; this is the mechanism for prose where derivation isn't possible. Captured as [[single-source-fan-out-with-consistency-check]].
+
 ## Hook quirks (by design)
 <!-- Behaviours of the `.claude/settings.json` hooks that look like bugs but aren't.
      Each documents what the quirk is, why it's not a bug, and why we're not fixing it.
